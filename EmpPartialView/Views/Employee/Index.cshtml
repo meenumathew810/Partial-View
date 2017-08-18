@@ -1,0 +1,41 @@
+﻿@model IEnumerable<EmpPartialView.Models.Employees>
+    @using System.Text;
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#Button1").click(function () {
+            $.ajax({
+                url: '@Url.Action("GetEmployee", "Employee")',
+                type: "GET",
+                success: function (data) {
+                    $('#container').html(data)
+                }
+            })
+        });
+    });
+</script>
+<div>
+    <h2>Partial View</h2>
+ </div>
+    <div id="container">
+
+    </div>
+<input id="Button1" type="button" value="button" />
+
+    @*@{ Html.RenderPartial("Employee", Model); }
+
+</div>
+@{
+    MvcHtmlString res = Html.Partial("Employee", Model);
+    StringBuilder sb = new StringBuilder();
+    sb.Append(res + "<h2>FGHFDCJFGJGVJV FHGFHFGJHH</h2>");
+}
+
+@Html.Raw(sb.ToString())
+
+@{Html.RenderAction("GetEmployees", "Employee");}*@
